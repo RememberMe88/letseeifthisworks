@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit & Collections Transfer Helper</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        select,
+        textarea {
+            width: calc(100% - 12px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output-section {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .output-section h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .output-info {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .important {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .controls a:hover {
+            text-decoration: underline;
+        }
+        .not-handled {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ffdddd;
+            border-radius: 4px;
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        .not-handled h3 {
+            color: #d32f2f;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .not-handled p {
+            margin-bottom: 5px;
+        }
+        .not-handled strong {
+            font-weight: bold;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Credit & Collections Transfer Helper</h2>
+
+        <div class="not-handled">
+            <h3>Do NOT Contact Credit & Collections For:</h3>
+            <p>For <strong>non-sufficient funds for payroll</strong>, please refer to: <a href="#">Resolve a non-sufficient funds (NSF) hold on your payroll service</a>.</p>
+            <p>For <strong>Payroll Collections issues</strong>, please refer to: <a href="#">When to contact the Payroll Collections Team</a>.</p>
+            <p>For customers <strong>disputing their bill or a charge</strong> to their account, please refer to: <a href="#">Non-technical de-escalation techniques</a>.</p>
+            <p>For <strong>general inquiries or validation of charges and refunds</strong>, please refer to: <a href="#">Charges that appear on a customer's statement</a>.</p>
+            <p>For <strong>charges or refunds that require the Customer Transaction and Retention Services (CTRS) team</strong>, please refer to: <a href="#">Escalate a case to Customer Transaction and Retention Services (CTRS)</a>.</p>
+        </div>
+
+        <p>Please fill out the following information to prepare for the warm transfer to Credit & Collections.</p>
+
+        <div class="input-group">
+            <label for="accountNumber">Customer Account Number (no EINs):</label>
+            <input type="text" id="accountNumber" name="accountNumber">
+        </div>
+
+        <div class="input-group">
+            <label for="firstName">Customer's First Name:</label>
+            <input type="text" id="firstName" name="firstName">
+        </div>
+
+        <div class="input-group">
+            <label for="lastName">Customer's Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+        </div>
+
+        <div class="input-group">
+            <label for="phoneNumber">Customer's Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber">
+        </div>
+
+        <div class="input-group">
+            <label for="reason">Reason for Contacting C&C:</label>
+            <select id="reason" name="reason">
+                <option value="">-- Select a Reason --</option>
+                <option value="Account Status Issue">Account Status is on Account Hold, Uncollectible, or Delinquent.</option>
+                <option value="Payment Inquiry">Received an invoice or email from Collections and want to pay it.</option>
+                <option value="Billing/Collection Question">Questions about a bill or collection correspondence (excluding billing disputes).</option>
+                <option value="Quote Credit Hold Follow Up">Follow up on a quote that is on a credit hold.</option>
+                <option value="Invoice Copy Request">Get copies of invoices.</option>
+                <option value="Credit Limit Question">Ask questions about their credit limits.</option>
+                <option value="Credit Limit Increase Request">Request an increase to their credit limits.</option>
+            </select>
+            <p style="font-size: 0.9em; color: #777; margin-top: 5px;">Select the primary reason for the call.</p>
+        </div>
+
+        <div class="input-group">
+            <label for="actionNeeded">Action C&C Needs to Take:</label>
+            <textarea id="actionNeeded" name="actionNeeded" rows="3" placeholder="Briefly describe the action C&C needs to take."></textarea>
+        </div>
+
+        <button onclick="generateTransferInfo()">Generate Transfer Information</button>
+
+        <div id="transferInfo" class="output-section" style="display: none;">
+            <h3>Ready for Warm Transfer</h3>
+            <p>Dial: <span class="important">1-800-925-8364, Option 3</span></p>
+            <p>Provide the following information:</p>
+            <p class="output-info"><span class="important">Account Number:</span> <span id="outputAccountNumber"></span></p>
+            <p class="output-info"><span class="important">Customer Name:</span> <span id="outputName"></span></p>
+            <p class="output-info"><span class="important">Customer Phone:</span> <span id="outputPhoneNumber"></span></p>
+            <p class="output-info"><span class="important">Reason:</span> <span id="outputReason"></span></p>
+            <p class="output-info"><span class="important">Action Needed:</span> <span id="outputActionNeeded"></span></p>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            Please fill out all the required fields.
+        </div>
+
+        <div class="controls">
+            <a href="javascript:location.reload()">Start Over</a>
+        </div>
+    </div>
+
+    <script>
+        function generateTransferInfo() {
+            const accountNumber = document.getElementById("accountNumber").value;
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+            const reason = document.getElementById("reason").value;
+            const actionNeeded = document.getElementById("actionNeeded").value;
+            const transferInfoDiv = document.getElementById("transferInfo");
+            const errorMessageDiv = document.getElementById("errorMessage");
+
+            if (accountNumber && firstName && lastName && phoneNumber && reason && actionNeeded) {
+                document.getElementById("outputAccountNumber").textContent = accountNumber;
+                document.getElementById("outputName").textContent = firstName + " " + lastName;
+                document.getElementById("outputPhoneNumber").textContent = phoneNumber;
+                document.getElementById("outputReason").textContent = reason;
+                document.getElementById("outputActionNeeded").textContent = actionNeeded;
+                transferInfoDiv.style.display = "block";
+                errorMessageDiv.style.display = "none";
+            } else {
+                transferInfoDiv.style.display = "none";
+                errorMessageDiv.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
