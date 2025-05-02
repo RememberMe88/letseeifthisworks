@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QBO Support Template Tool</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h2, h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        select,
+        textarea,
+        input[type="checkbox"] {
+            width: calc(100% - 12px); /* Adjust for checkboxes */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+        }
+        input[type="checkbox"] {
+            width: auto; /* Adjust width for checkboxes */
+            margin-right: 5px;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .checkbox-group label {
+            display: block; /* Display checkboxes on separate lines */
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        .radio-group label {
+            display: block;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+        .workgroup-info {
+            font-weight: bold;
+            color: black;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .workgroup-selection {
+            color: green;
+        }
+        .verified-radio-label {
+            color: green;
+            font-style: italic;
+            margin-left: 5px;
+        }
+        #level2VerificationDetails {
+            margin-left: 20px;
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none; /* Initially hidden */
+        }
+        #level2VerificationDetails h4 {
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        #level2VerificationDetails .checkbox-group label {
+            display: block;
+            margin-bottom: 3px;
+        }
+        .required-text {
+            color: red;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-left: 5px;
+        }
+        .level2-verified-label {
+            color: green;
+            font-style: italic;
+            margin-left: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px; /* Add some spacing between buttons */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .note {
+            color: #777;
+            font-size: 0.9em;
+        }
+        #outputContainer {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap; /* Preserve line breaks */
+            font-family: monospace;
+            font-size: 1em;
+            position: relative; /* To position the copy button */
+        }
+        #outputContainer h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        #actionButtons {
+            margin-top: 20px;
+            display: flex; /* Arrange buttons in a row */
+            gap: 10px; /* Add some space between buttons */
+            align-items: center; /* Vertically align items */
+        }
+        #copyButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        #copyButton:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>QBO Support Template Tool</h2>
+        <p class="workgroup-info">
+            T2 Chat Workgroup selection: <span class="workgroup-selection">CNX JON RMT T2 QL CORE</span>
+        </p>
+
+        <div class="form-group">
+            <label for="realmId">COID/Realm ID:</label>
+            <input type="text" id="realmId" name="realmId">
+        </div>
+
+        <h3>Verification</h3>
+        <div class="form-group checkbox-group">
+            <label><input type="checkbox" name="verifiedCustomerName"> Verified Customer name</label>
+        </div>
+        <div class="form-group">
+            <label for="cxRole">Customer Role:</label>
+            <select id="cxRole" name="cxRole">
+                <option>-- Select Role --</option>
+                <option value="Primary Admin">Primary Admin</option>
+                <option value="Company Admin">Company Admin</option>
+                <option value="Accountant Firm">Accountant Firm</option>
+                <option value="Non-Intuit Customer">Non-Intuit Customer</option>
+            </select>
+        </div>
+
+        <h3>Level 1 Verification Method (Select One):</h3>
+        <div class="form-group radio-group">
+            <label><input type="radio" name="level1Verification" value="email" id="emailVerification"> Email address on the account<span id="emailVerified" class="verified-radio-label" style="display:none;"> Level 1 Verified</span></label>
+            <label><input type="radio" name="level1Verification" value="companyId" id="companyIdVerification"> Company ID or realm ID<span id="companyIdVerified" class="verified-radio-label" style="display:none;"> Level 1 Verified</span></label>
+            <label><input type="radio" name="level1Verification" value="governmentId" id="governmentIdVerification"> Government identifier (e.g., Tax file number or EIN)<span id="governmentIdVerified" class="verified-radio-label" style="display:none;"> Level 1 Verified</span></label>
+            <label><input type="radio" name="level1Verification" value="phone" id="phoneVerification"> Phone number<span id="phoneVerified" class="verified-radio-label" style="display:none;"> Level 1 Verified</span></label>
+        </div>
+
+        <div class="form-group checkbox-group">
+            <label><input type="checkbox" id="level2VerificationCompleted" name="level2VerificationCompleted"> Level 2 Verification Completed? <span id="level2Verified" class="verified-radio-label" style="display:none;">Level 2 Verified</span></label>
+        </div>
+
+        <div id="level2VerificationDetails" style="display: none;">
+            <h4>Level 2 Verification Details (Select all that apply: <span class="required-text">2 Required</span>)</h4>
+            <div class="form-group checkbox-group">
+                <label><input type="checkbox" name="level2VerificationDetail" value="businessName"> Business name</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="businessAddress"> Business address</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="companyIdOnline"> Company ID (Online)</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="canRole"> CAN (QBDT) or Role (QB Time)</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="licenseNumber"> License Number (DT)</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="qbTimeIdentifier"> (QB Time only) Company Identifier or QB Time web address</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="phoneNumber"> Phone number (Available if not used for Lvl 1)</label>
+                <label><input type="checkbox" name="level2VerificationDetail" value="emailAddress"> Email address (Available if not used for Lvl 1)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="caseNumber">Case Number:</label>
+            <input type="text" id="caseNumber" name="caseNumber">
+        </div>
+
+        <div class="form-group">
+            <label for="screenShareCode">Screenshare Code:</label>
+            <input type="text" id="screenShareCode" name="screenShareCode">
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>Further Information</h3>
+        <div class="form-group">
+            <label for="customerGoal">Customer's End Goal:</label>
+            <textarea id="customerGoal" name="customerGoal"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="stoppingThem">What is stopping them:</label>
+            <textarea id="stoppingThem" name="stoppingThem"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="resourcesUsed">Resources used:</label>
+            <textarea id="resourcesUsed" name="resourcesUsed"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="troubleshootingDone">Troubleshooting done:</label>
+            <textarea id="troubleshootingDone" name="troubleshootingDone"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="tier2Needs">What do you need Tier 2 to do for you:</label>
+            <textarea id="tier2Needs" name="tier2Needs"></textarea>
+        </div>
+        <div id="actionButtons">
+            <button type="button" onclick="generateOutput()">Generate Template Output</button>
+            <button type="button" onclick="resetForm()">Start Over</button>
+        </div>
+    </div>
+
+    <div id="outputContainer" style="display: none;">
+        <h3>Generated Output</h3>
+        <pre id="templateOutput"></pre>
+        <button id="copyButton" onclick="copyOutput()">Copy</button>
+    </div>
+
+    <script>
+        const verificationRadios = document.querySelectorAll('input[name="level1Verification"]');
+        const emailVerifiedSpan = document.getElementById('emailVerified');
+        const companyIdVerifiedSpan = document.getElementById('companyIdVerified');
+        const governmentIdVerifiedSpan = document.getElementById('governmentIdVerified');
+        const phoneVerifiedSpan = document.getElementById('phoneVerified');
+        const level2VerificationCompletedCheckbox = document.getElementById('level2VerificationCompleted');
+        const level2VerificationDetailsDiv = document.getElementById('level2VerificationDetails');
+        const level2VerifiedSpan = document.getElementById('level2Verified');
+        const outputContainer = document.getElementById('outputContainer');
+        const templateOutput = document.getElementById('templateOutput');
+        const formElements = document.querySelectorAll('input, select, textarea');
+        const level1RadioButtons = document.querySelectorAll('input[name="level1Verification"]');
+        const level2Checkboxes = document.querySelectorAll('input[name="level2VerificationDetail"]');
+        const verifiedCxNameCheckbox = document.querySelector('input[name="verifiedCustomerName"]');
+        const copyButton = document.getElementById('copyButton');
+
+        verificationRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                emailVerifiedSpan.style.display = 'none';
+                companyIdVerifiedSpan.style.display = 'none';
+                governmentIdVerifiedSpan.style.display = 'none';
+                phoneVerifiedSpan.style.display = 'none';
+
+                if (this.checked) {
+                    const id = this.id.replace('Verification', 'Verified');
+                    const verifiedSpan = document.getElementById(id);
+                    if (verifiedSpan) {
+                        verifiedSpan.textContent = 'Level 1 Verified';
+                        verifiedSpan.style.display = 'inline';
+                    }
+                }
+            });
+        });
+
+        level2VerificationCompletedCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                level2VerificationDetailsDiv.style.display = 'block';
+                level2VerifiedSpan.style.display = 'inline';
+            } else {
+                level2VerificationDetailsDiv.style.display = 'none';
+                level2VerifiedSpan.style.display = 'none';
+            }
+        });
+
+        function generateOutput() {
+            const realmId = document.getElementById('realmId').value;
+            const cxRole = document.getElementById('cxRole').value;
+            const level1Verification = document.querySelector('input[name="level1Verification"]:checked');
+            const level2VerificationCompleted = document.getElementById('level2VerificationCompleted').checked;
+            const level2VerificationDetails = Array.from(document.querySelectorAll('input[name="level2VerificationDetail"]:checked'))
+                .map(checkbox => checkbox.value);
+            const caseNumber = document.getElementById('caseNumber').value;
+            const screenShareCode = document.getElementById('screenShareCode').value;
+            const customerGoal = document.getElementById('customerGoal').value;
+            const stoppingThem = document.getElementById('stoppingThem').value;
+            const resourcesUsed = document.getElementById('resourcesUsed').value;
+            const troubleshootingDone = document.getElementById('troubleshootingDone').value;
+            const tier2Needs = document.getElementById('tier2Needs').value;
+            const verifiedCustomerName = document.querySelector('input[name="verifiedCustomerName"]').checked ? 'Yes' : 'No';
+
+            let level2VerificationText = '';
+            if (level2VerificationCompleted && level2VerificationDetails.length > 0) {
+                level2VerificationText = `: ${level2VerificationDetails.join(', ')}`;
+            } else if (level2VerificationCompleted) {
+                level2VerificationText = ': (None Selected)';
+            } else {
+                level2VerificationText = ': No';
+            }
+
+            let output = `* Realm ID: ${realmId}\n`;
+            output += `* What level of verification was completed and what did you verify: Level 1: ${level1Verification ? level1Verification.value : 'Not Selected'}, Level 2: ${level2VerificationCompleted ? 'Yes' : 'No'}${level2VerificationText}\n`;
+            output += `* Case Number: ${caseNumber}\n`;
+            output += `* Screenshare Code: ${screenShareCode}\n`;
+            output += `* Customer's End Goal: ${customerGoal}\n`;
+            output += `* What is stopping them: ${stoppingThem}\n`;
+            output += `* Resources used: ${resourcesUsed}\n`;
+            output += `* Troubleshooting done: ${troubleshootingDone}\n`;
+            output += `* What do you need Tier 2 to do for you: ${tier2Needs}\n`;
+
+            templateOutput.textContent = output;
+            outputContainer.style.display = 'block';
+        }
+
+        function resetForm() {
+            formElements.forEach(element => {
+                if (element.type === 'text' || element.type === 'textarea' || element.type === 'select-one') {
+                    element.value = '';
+                } else if (element.type === 'checkbox') {
+                    element.checked = false;
+                } else if (element.type === 'radio') {
+                    element.checked = false;
+                    const verifiedSpan = document.getElementById(element.id.replace('Verification', 'Verified'));
+                    if (verifiedSpan) {
+                        verifiedSpan.style.display = 'none';
+                    }
+                }
+            });
+            level2VerificationDetailsDiv.style.display = 'none';
+            level2VerifiedSpan.style.display = 'none';
+            outputContainer.style.display = 'none';
+        }
+
+        function copyOutput() {
+            const outputText = templateOutput.textContent;
+            navigator.clipboard.writeText(outputText)
+                .then(() => {
+                    alert('Output copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                    alert('Failed to copy output to clipboard.');
+                });
+        }
+    </script>
+</body>
+</html>
