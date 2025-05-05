@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBSEG Expert Tools: The Hilarious Hurdles</title>
+    <style>
+        body {
+            font-family: 'Bangers', cursive, sans-serif; /* A fun, comic-book style font */
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #f0f8ff; /* Light, neutral Alice Blue */
+            color: #2e8b57; /* A friendly Sea Green */
+        }
+
+        h1 {
+            color: #4682b4; /* A cool Steel Blue header */
+            border-bottom: 3px dashed #6495ed; /* Dashed, cheerful Cornflower Blue underline */
+            padding-bottom: 10px;
+        }
+
+        .checklist-section {
+            margin-bottom: 25px;
+            background-color: #e0ffff; /* Light, airy PaleTurquoise */
+            padding: 15px;
+            border-radius: 10px; /* Nicely rounded corners */
+            box-shadow: 5px 5px 10px #8fbc8f; /* A subtle, earthy OliveDrab shadow */
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checklist-item label {
+            margin-left: 15px;
+            color: #556b2f; /* A grounded DarkOliveGreen label */
+            flex-grow: 1;
+            font-style: italic;
+            font-weight: bold; /* Still emphasizing the funny labels */
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin-right: 12px;
+        }
+
+        .dropdown {
+            margin-left: 15px;
+            padding: 10px;
+            border: 2px dotted #8a2be2; /* A playful, dotted Violet border */
+            border-radius: 6px;
+        }
+
+        .dropdown:focus {
+            border-color: #9400d3;
+            outline: none;
+            box-shadow: 0 0 8px #ba55d3; /* A more focused, Orchid shadow */
+        }
+
+        button {
+            background-color: #483d8b; /* A strong DarkSlateBlue button */
+            color: #f0e68c; /* A sunny Khaki text */
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease-in-out; /* Keeping the smooth transition */
+        }
+
+        button:hover {
+            background-color: #6a5acd; /* A slightly lighter SlateBlue on hover */
+        }
+
+        #console-output {
+            margin-top: 30px;
+            padding: 15px;
+            border: 2px dashed #ffa07a; /* Dashed, friendly LightSalmon border */
+            border-radius: 8px;
+            background-color: #faebd7; /* A neutral AntiqueWhite background */
+            color: #a0522d; /* A warm Sienna text */
+            font-size: 1em;
+            height: 150px;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace; /* A clean, readable monospace font */
+        }
+
+        .acknowledged {
+            font-style: oblique;
+            color: #3cb371; /* A lively MediumSeaGreen */
+            margin-left: 15px;
+            font-weight: bolder;
+            text-shadow: 1px 1px #2e8b57; /* A subtle green text shadow */
+        }
+
+        .instruction {
+            color: #d2691e; /* A warm Chocolate instruction text */
+            font-size: 0.9em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The Hilarious Hurdles: SBSEG Expert Tools</h1>
+    <p class="instruction">Embark on this whimsical quest to master the SBSEG tools! Failure to check boxes may result in digital squirrels judging you.</p>
+
+    <div class="checklist-section">
+        <h2>Step 1: Befriending Your Browser</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="chrome" name="tool" value="chrome">
+            <label for="chrome">Convince Chrome it's the Coolest Browser (and that it's updated, wink wink)</label>
+            <span id="chrome-ack" class="acknowledged" style="display:none;">Chrome is now your bestie.</span>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="globalprotect" name="tool" value="globalprotect">
+            <label for="globalprotect">Summon the GlobalProtect Guardian (Connect to the VPN, or face the network trolls)</label>
+            <span id="globalprotect-ack" class="acknowledged" style="display:none;">The Guardian watches over you.</span>
+        </div>
+
+    </div>
+
+    <div class="checklist-section">
+        <h2>Step 2: Discovering the Magical Portal</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="portal" name="tool" value="portal">
+            <label for="portal">Locate the Legendary SBSEG Experts Tool Portal
+                <select class="dropdown" id="portal-url">
+                    <option value="">Gaze Upon the URL Status</option>
+                    <option value="bookmarked">Aha! Bookmarked like a pro.</option>
+                    <option value="not-bookmarked">Uh oh, looks like a treasure hunt. (Not Bookmarked)</option>
+                </select>
+            </label>
+            <span id="portal-ack" class="acknowledged" style="display:none;">You've found the shimmering portal.</span>
+        </div>
+    </div>
+
+    <div class="checklist-section">
+        <h2>Step 3: Appeasing the Amazon Connect Gremlins (CCP)</h2>
+
+        <div class="checklist-item">
+            <input type="checkbox" id="ccp" name="tool" value="ccp">
+            <label for="ccp">Brave the Launching of the Amazon Connect CCP (May it not crash this time!)</label>
+            <span id="ccp-ack" class="acknowledged" style="display:none;">The gremlins seem calm for now.</span>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="ccp-login" name="tool" value="ccp-login">
+            <label for="ccp-login">Whisper the Secret Login Words to the Gremlins (Enter Credentials)</label>
+            <span id="ccp-login-ack" class="acknowledged" style="display:none;">The gremlins have accepted your offering.</span>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="ccp-popup" name="tool" value="ccp-popup">
+            <label for="ccp-popup">Allow the Gremlin Pop-ups (They have important messages, allegedly)</label>
+            <span id="ccp-popup-ack" class="acknowledged" style="display:none;">The pop-ups shall not be blocked!</span>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="ccp-window" name="tool" value="ccp-window">
+            <label for="ccp-window">Keep the Gremlin Window Open (Don't make them hide again!)</label>
+            <span id="ccp-window-ack" class="acknowledged" style="display:none;">The gremlin's window remains steadfast.</span>
+        </div>
+        <div class="checklist-item">
+            <input type="radio" id="status-offline" name="ccp-status" value="offline">
+            <label for="status-offline">Gremlin Status: Taking a Nap (Offline)</label>
+        </div>
+        <div class="checklist-item">
+            <input type="radio" id="status-available" name="ccp-status" value="available">
+            <label for="status-available">Gremlin Status: Ready to Cause Mischief (Available)</label>
+        </div>
+    </div>
+
+    <div class="checklist-section">
+        <h2>Step 4: Entering the Salesforce Jungle</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="salesforce" name="tool" value="salesforce">
+            <label for="salesforce">Venture into the Salesforce Jungle (Hope you have your map!)</label>
+            <span id="salesforce-ack" class="acknowledged" style="display:none;">You've swung into the jungle.</span>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="salesforce-tab" name="tool" value="salesforce-tab">
+            <label for="salesforce-tab">Find the Elusive B2B Prod Tab (Beware of the wild objects!)</label>
+            <span id="salesforce-tab-ack" class="acknowledged" style="display:none;">The elusive tab has been spotted!</span>
+        </div>
+    </div>
+    <button onclick="resetChecklist()">Initiate the Great Digital Cleanse (Reset)</button>
+    <div id="console-output">
+        Log of Your Amusing Journey:
+    </div>
+
+    <script>
+        const consoleOutput = document.getElementById('console-output');
+
+        function logEvent(event) {
+            let message = '';
+            let acknowledgementSpan = null;
+
+            if (event.target.type === 'checkbox') {
+                message = `${event.target.id} - Status: ${event.target.checked ? 'Checked! You did it!' : 'Not yet conquered!'}`;
+                acknowledgementSpan = document.getElementById(event.target.id + '-ack');
+                if (acknowledgementSpan) {
+                    acknowledgementSpan.style.display = event.target.checked ? 'inline' : 'none';
+                }
+            } else if (event.target.id === 'portal-url') {
+                message = `Portal URL Status: ${event.target.options[event.target.selectedIndex].text}`;
+            } else if (event.target.name === 'ccp-status') {
+                message = `CCP Gremlin Status: ${event.target.labels[0].textContent}`;
+            }
+            console.log(message);
+            consoleOutput.textContent += message + '\n';
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        document.querySelectorAll('input[type="checkbox"], #portal-url, input[type="radio"][name="ccp-status"]')
+            .forEach(element => {
+                element.addEventListener('change', logEvent);
+            });
+
+        function resetChecklist() {
+            document.querySelectorAll('input[type="checkbox"], input[type="radio"]')
+                .forEach(element => {
+                    element.checked = false;
+                    const ackSpan = document.getElementById(element.id + '-ack');
+                    if (ackSpan) {
+                        ackSpan.style.display = 'none';
+                    }
+                });
+            document.getElementById('portal-url').selectedIndex = 0;
+            consoleOutput.textContent = 'The digital slate has been wiped clean. Let the silliness commence anew!';
+        }
+    </script>
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+</body>
+
+</html>
